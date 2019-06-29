@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './Admin.css'
 import axios from 'axios'
 import { API_URL } from './config'
+import Search from './Search'
 const log = console.log
 
 const Admin = () => {
   const [employeeData, setEmployeeData] = useState(null)
   useEffect(() => {
-    axios.get(API_URL + 'employee1').then(v => {
-      setEmployeeData(v)
+    axios.get(API_URL + 'employees/').then(v => {
+      setEmployeeData(v && v.data)
     })
   }, [])
   return (
@@ -67,25 +68,15 @@ const Admin = () => {
               </div>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </nav>
       <main role="main" className="container">
         <div className="starter-template">
-          <h1>Bootstrap starter template</h1>
-          <p className="lead">
-            Use this document as a way to quickly start any new project.
-            <br /> All you get is this text and a mostly barebones HTML document.
-          </p>
+          <Search />
           {employeeData ? (
-            <p className="text-left">
+            <div className="text-left">
               <pre>{JSON.stringify(employeeData, null, 2)}</pre>
-            </p>
+            </div>
           ) : (
             'Loading'
           )}
