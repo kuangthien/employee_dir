@@ -1,6 +1,16 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Admin.css'
+import axios from 'axios'
+import { API_URL } from './config'
+const log = console.log
+
 const Admin = () => {
+  const [employeeData, setEmployeeData] = useState(null)
+  useEffect(() => {
+    axios.get(API_URL + 'employee1').then(v => {
+      setEmployeeData(v)
+    })
+  }, [])
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -72,6 +82,13 @@ const Admin = () => {
             Use this document as a way to quickly start any new project.
             <br /> All you get is this text and a mostly barebones HTML document.
           </p>
+          {employeeData ? (
+            <p className="text-left">
+              <pre>{JSON.stringify(employeeData, null, 2)}</pre>
+            </p>
+          ) : (
+            'Loading'
+          )}
         </div>
       </main>
       {/* /.container */}
