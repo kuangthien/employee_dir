@@ -1,0 +1,6 @@
+[build]
+  command = "yarn build"
+  publish = "build"
+  base = "/"
+  functions = "lambda"
+  environment = {  YARN_VERSION = "1.16.0", NODE_VERSION = "10.16.0" }
