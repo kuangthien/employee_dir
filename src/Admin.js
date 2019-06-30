@@ -9,9 +9,10 @@ const log = console.log
 
 const Admin = () => {
   const [employeeData, setEmployeeData] = useState(null)
+  const name = 'John Hartman'
   useEffect(() => {
     axios
-      .get(API_URL + 'employees')
+      .get(API_URL + 'employees/' + name)
       .then(v => {
         setEmployeeData(v && v.data)
       })
@@ -31,7 +32,7 @@ const Admin = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#">
+        <a href="#top" className="navbar-brand" >
           Navbar
         </a>
         <button
@@ -49,7 +50,7 @@ const Admin = () => {
       <main role="main" className="container">
         <div className="starter-template">
           <Search handleSearchSubmitCallback={handleSearchSubmit} />
-          <Result employeeData={employeeData} />
+          {employeeData && name && <Result employeeData={employeeData} name={name} />}
         </div>
       </main>
       {/* /.container */}
