@@ -27,54 +27,73 @@ const Result = ({ employeeData: rootEmployeeData, name: rootEmployeeName }) => {
     return <b>Loading</b>
   } else {
     return (
-      <div className="text-left  p-3 px-2 position-relative" style={{ background: '#efefef' }}>
-        <EmployeeUi bucketEmployees={bucketEmployees} isMe={rootEmployeeName} />
-      </div>
+      <>
+        <div className=" w-100" style={{ overflow: 'auto', background: '#efefef' }}>
+          <div className="   p-3 px-2 position-relative" style={{}}>
+            <EmployeeUi bucketEmployees={bucketEmployees} isMe={rootEmployeeName} />
+          </div>
+          <div className="clearfix" />
+        </div>
+      </>
     )
   }
 }
 const EmployeeUi = ({ bucketEmployees, isMe }) => {
+  const { directSubordinates } = bucketEmployees[isMe]
+  const isALeaf = directSubordinates && directSubordinates.length <= 0
   return (
-    <div className="position-relative">
+    <div className="position-relative text-center">
       <div
-        className="p-3  mb-5 shadow-sm bg-white text-left "
+        className={`p-3 d-inline-block mb-5 shadow-sm bg-white text-left ${isALeaf && 'isALeaf'}`}
         style={{
-          width: 'auto',
+          width: 220,
           overflow: 'hidden',
         }}>
+        {isALeaf && (
+          <style>{`
+        [id="td-${isMe}"]  {
+          display:block
+        }
+        .isALeaf{margin-bottom: 0!important}
+        `}</style>
+        )}
         <table>
-          <tr>
-            <td valign="top">
-              <div
-                className="avat   rounded mr-2"
-                style={{
-                  height: 64,
-                  width: 64,
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: '50%',
-                  backgroundImage: `url('https://i.pravatar.cc/60?u=${isMe}@pravatar.com')`,
-                }}
-              />
-            </td>
-            <td valign="top">
-              <div className="text-uppercase fz-14 font-weight-bold mb-0"> {bucketEmployees[isMe].title}</div>
-              {isMe}
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td valign="top">
+                <div
+                  className="avat   rounded mr-2"
+                  style={{
+                    height: 64,
+                    width: 64,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '50%',
+                    backgroundImage: `url('https://i.pravatar.cc/60?u=${isMe}@pravatar.com')`,
+                  }}
+                />
+              </td>
+              <td valign="top">
+                <div className="text-uppercase fz-14 font-weight-bold mb-0"> {bucketEmployees[isMe].title}</div>
+                {isMe}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="childs position-relative  ">
-      <table width="100%">
-          <tr>
-            {bucketEmployees[isMe].directSubordinates.map(v => {
-              return (
-                <td valign="top">
-                  <EmployeeUi bucketEmployees={bucketEmployees} isMe={v} />
-                </td>
-              )
-            })}
-          </tr>
+        <table width="100%">
+          <tbody>
+            <tr>
+              {bucketEmployees[isMe].directSubordinates.map(v => {
+                return (
+                  <td valign="top" id={`td-${v}`} key={v}>
+                    <EmployeeUi bucketEmployees={bucketEmployees} isMe={v} />
+                  </td>
+                )
+              })}
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
