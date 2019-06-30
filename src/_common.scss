@@ -1,0 +1,30 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 40rem,
+  md: 52rem,
+  lg: 64rem,
+  xl: 90rem,
+);
+$container-max-widths: (
+  sm: 38rem,
+  md: 50rem,
+  lg: 62rem,
+  xl: 88rem,
+);
+@import '~bootstrap-scss/mixins/breakpoints';
+
+@for $i from 10 through 52 {
+	.fz-#{$i} {
+		font-size: #{$i}px;
+	}
+	.fz-sm-#{$i} {
+		@include media-breakpoint-up(sm) {
+			font-size: #{$i}px;
+		}
+	}
+	.fz-md-#{$i} {
+		@include media-breakpoint-up(md) {
+			font-size: #{$i}px;
+		}
+	}
+}
