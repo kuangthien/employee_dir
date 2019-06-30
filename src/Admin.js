@@ -9,16 +9,10 @@ const log = console.log
 
 const Admin = () => {
   const [employeeData, setEmployeeData] = useState(null)
-  const name = 'John Hartman'
-  useEffect(() => {
-    axios
-      .get(API_URL + 'employees/' + name)
-      .then(v => {
-        setEmployeeData(v && v.data)
-      })
-      .catch(err => {})
-  }, [])
+  const [searchKeyword, setSearchKeyword] = useState('')
+  useEffect(() => {}, [])
   const handleSearchSubmit = keyword => {
+    setSearchKeyword(keyword)
     axios
       .get(API_URL + 'employees/' + keyword)
       .then(v => {
@@ -52,7 +46,7 @@ const Admin = () => {
           <div className="container">
             <Search handleSearchSubmitCallback={handleSearchSubmit} />
           </div>
-          {employeeData && name && <Result employeeData={employeeData} name={name} />}
+          {employeeData && searchKeyword && <Result employeeData={employeeData} name={searchKeyword} />}
         </div>
       </main>
       {/* /.container */}

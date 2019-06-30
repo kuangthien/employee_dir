@@ -10,11 +10,11 @@ const Search = ({ handleSearchSubmitCallback }) => {
   return (
     <>
       <h1 className="mb-4 text-center fz-24 fz-md-32">Employee Explorer</h1>
-      <form className=" justify-content-center  form-inline my-2 my-lg-0" onSubmit={handleSearchSubmit}>
+      <form className=" justify-content-center  form-inline my-3 " onSubmit={handleSearchSubmit}>
         <input
           className="form-control form-control-lg mr-sm-2"
           type="text"
-          placeholder="Name or Tite"
+          placeholder="Ex: John Hartman "
           aria-label="Search"
           id="inputSearch"
         />

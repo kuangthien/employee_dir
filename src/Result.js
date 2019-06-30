@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 
 import { fromApiToBucketEmployees, getArSub } from './DataBucket'
 
@@ -28,11 +28,8 @@ const Result = ({ employeeData: rootEmployeeData, name: rootEmployeeName }) => {
   } else {
     return (
       <>
-        <div className=" w-100" style={{ overflow: 'auto', background: '#efefef' }}>
-          <div className="   p-3 px-2 position-relative" style={{}}>
-            <EmployeeUi bucketEmployees={bucketEmployees} isMe={rootEmployeeName} />
-          </div>
-          <div className="clearfix" />
+        <div className=" w-100  p-3 px-2 position-relative  " style={{ overflow: 'auto', background: '#efefef' }}>
+          <EmployeeUi bucketEmployees={bucketEmployees} isMe={rootEmployeeName} />
         </div>
       </>
     )
