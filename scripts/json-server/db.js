@@ -4,10 +4,10 @@ const employee3 = require('./static/employee3.json')
 const employee4 = require('./static/employee4.json')
 const employee5 = require('./static/employee5.json')
 
-const employee6 = require('./static/employee5.json')
-const employee7 = require('./static/employee5.json')
-const employee8 = require('./static/employee5.json')
-const employee9 = require('./static/employee5.json')
+const employee6 = require('./static/employee6.json')
+const employee7 = require('./static/employee7.json')
+const employee8 = require('./static/employee8.json')
+const employee9 = require('./static/employee9.json')
 
 const employees = [
   { key: 'John Hartman', data: employee1 },
@@ -32,6 +32,5 @@ module.exports = () => {
     employees: employees.map(v => v.key),
     ...employeeData(),
   }
-
   return data
 }

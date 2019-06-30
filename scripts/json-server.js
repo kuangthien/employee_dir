@@ -2,11 +2,12 @@ const jsonServer = require('json-server')
 const server = jsonServer.create()
 const rewriteRoutes = require('./json-server/routes.json')
 const router = jsonServer.router(require('./json-server/db')())
-
+const log = console.log
 // watch static json files:
 const middlewares = jsonServer.defaults({
   static: 'scripts/json-server/static',
 })
+const fs = require('fs')
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)

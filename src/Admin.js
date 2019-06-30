@@ -4,7 +4,7 @@ import axios from 'axios'
 import { API_URL } from './config'
 import Search from './Search'
 import Result from './Result'
-
+import './_common.scss'
 const log = console.log
 
 const Admin = () => {
@@ -32,7 +32,7 @@ const Admin = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a href="#top" className="navbar-brand" >
+        <a href="#top" className="navbar-brand">
           Navbar
         </a>
         <button
@@ -47,9 +47,11 @@ const Admin = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarsExampleDefault" />
       </nav>
-      <main role="main" className="container">
+      <main role="main" className="">
         <div className="starter-template">
-          <Search handleSearchSubmitCallback={handleSearchSubmit} />
+          <div className="container">
+            <Search handleSearchSubmitCallback={handleSearchSubmit} />
+          </div>
           {employeeData && name && <Result employeeData={employeeData} name={name} />}
         </div>
       </main>

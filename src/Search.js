@@ -9,7 +9,7 @@ const Search = ({ handleSearchSubmitCallback }) => {
   }
   return (
     <>
-      <h1 className="mb-4">Employee Explorer</h1>
+      <h1 className="mb-4 text-center fz-24 fz-md-32">Employee Explorer</h1>
       <form className=" justify-content-center  form-inline my-2 my-lg-0" onSubmit={handleSearchSubmit}>
         <input
           className="form-control form-control-lg mr-sm-2"
