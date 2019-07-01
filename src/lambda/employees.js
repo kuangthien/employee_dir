@@ -25,11 +25,19 @@ export function handler(event, context, callback) {
       })
     } else {
       const queryEmployee = trimmedPath.replace('/', '')
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(getEmployeeByName(queryEmployee)),
-        headers,
-      })
+      const rs = getEmployeeByName(queryEmployee)
+      if (rs) {
+        return callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(rs),
+          headers,
+        })
+      } else {
+        return callback(null, {
+          statusCode: 404,
+          headers,
+        })
+      }
     }
   }
 
