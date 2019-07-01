@@ -2,16 +2,19 @@ const { headers } = require('../lambda-utils.js')
 const path = require('path')
 const log = console.log
 const db = require('../../scripts/json-server/db')
-
 const dbData = db()
-
 const getAll = () => dbData.employees
-const getEmployeeByName = name => dbData[name]
+const getEmployeeByName = name => {
+  log(dbData[name])
+  return dbData[name]
+}
 
 export function handler(event, context, callback) {
   if (event.httpMethod === 'GET') {
     const { path } = event
-    const trimmedPath = path.replace('/employees', '')
+    log(path)
+    const trimmedPath = path.replace('/.netlify/functions/employees','')
+    log({ trimmedPath })
     if (trimmedPath === '') {
       const rs = getAll()
       return callback(null, {
@@ -21,16 +24,15 @@ export function handler(event, context, callback) {
       })
     } else {
       const queryEmployee = trimmedPath.replace('/', '')
-      const rs = getEmployeeByName(queryEmployee)
       return callback(null, {
         statusCode: 200,
-        body: JSON.stringify(rs),
+        body: JSON.stringify(getEmployeeByName(queryEmployee)),
         headers,
       })
     }
   }
 
-  return callback(null, {
+  callback(null, {
     statusCode: 200,
     headers,
   })
