@@ -5,17 +5,18 @@ const db = require('../../scripts/json-server/db')
 const dbData = db()
 const getAll = () => dbData.employees
 const getEmployeeByName = name => {
-  log(dbData[name])
-  return dbData[name]
+  const nameInDb = name.replace(' ', '%20')
+  log({ nameInDb, name })
+  return dbData[nameInDb]
 }
 
 export function handler(event, context, callback) {
   if (event.httpMethod === 'GET') {
     const { path } = event
     log(path)
-    const trimmedPath = path.replace('/.netlify/functions/employees','')
+    const trimmedPath = path.replace('/.netlify/functions/employees', '')
     log({ trimmedPath })
-    if (trimmedPath === '') {
+    if (trimmedPath === '' || trimmedPath === '/') {
       const rs = getAll()
       return callback(null, {
         statusCode: 200,
